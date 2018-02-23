@@ -47,6 +47,39 @@ def search(name):
 
 win.addButtons(["查询", "重置", "退出"], search)
 
+def pressEnterSearch():
+    # same as line24-line45
+    win.clearLabel("Resultcp")
+    findword = win.getEntry("word")
+    res = yd.Build(findword)
+    finalres = yd.Basic_Search(res)
+    finalrescp = yd.Advanced_Search(res)
+
+    message = ""
+    for i in finalres:
+        message += str(i) + "\n"
+
+    win.setLabel("Result", message)
+
+    message = ""
+
+    if finalrescp is None:
+        pass
+
+    else:
+        for i in finalrescp:
+            message += str(i) + "\n"
+            win.setLabel("Resultcp", "计算机科学技术：\n\n" + message)
+
+
+def keyPress(key):
+    if key == "<Return>":
+        pressEnterSearch()
+
+
+win.bindKey("<Return>", keyPress)
+
+
 win.go()
 
 
